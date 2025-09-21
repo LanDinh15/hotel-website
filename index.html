@@ -100,13 +100,51 @@
     .modal-next {
       right: 20px;
     }
+    /* Language toggle button */
+    .lang-toggle {
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 2px solid #1a3c34;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 50px;
+      text-align: center;
+    }
+    .lang-toggle.active {
+      background-color: #1a3c34;
+      color: #ffffff;
+    }
+    .lang-toggle:not(.active) {
+      background-color: #ffffff;
+      color: #1a3c34;
+    }
+    .lang-toggle:hover {
+      background-color: #2a5c4a;
+      color: #ffffff;
+      border-color: #2a5c4a;
+    }
   </style>
 </head>
 <body class="bg-[#f5f5f5] text-gray-800 font-['Roboto']">
   <!-- Navigation -->
   <nav class="bg-[#1a3c34] text-yellow-400 p-4 sticky top-0 z-50 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-3xl font-['Lora'] font-bold">Nhật Hoàng Hotel</h1>
+      <h1 class="text-3xl font-['Lora'] font-bold" data-translate="hotel_name">Nhật Hoàng Hotel</h1>
+      <ul id="nav-menu" class="hidden md:flex items-center space-x-6 text-lg">
+        <li><a href="#home" class="hover:text-yellow-200 transition" data-translate="nav_home">Trang Chủ</a></li>
+        <li><a href="#about" class="hover:text-yellow-200 transition" data-translate="nav_about">Giới Thiệu</a></li>
+        <li><a href="#rooms" class="hover:text-yellow-200 transition" data-translate="nav_rooms">Phòng</a></li>
+        <li><a href="#services" class="hover:text-yellow-200 transition" data-translate="nav_services">Dịch Vụ</a></li>
+        <li><a href="#contact" class="hover:text-yellow-200 transition" data-translate="nav_contact">Liên Hệ</a></li>
+        <li class="flex items-center space-x-2">
+          <button id="lang-toggle-vi" class="lang-toggle active">VI</button>
+          <button id="lang-toggle-en" class="lang-toggle">EN</button>
+        </li>
+      </ul>
       <div class="md:hidden">
         <button id="menu-toggle" class="text-yellow-400 focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -114,22 +152,19 @@
           </svg>
         </button>
       </div>
-      <ul id="nav-menu" class="hidden md:flex space-x-6 text-lg">
-        <li><a href="#home" class="hover:text-yellow-200 transition">Trang Chủ</a></li>
-        <li><a href="#about" class="hover:text-yellow-200 transition">Giới Thiệu</a></li>
-        <li><a href="#rooms" class="hover:text-yellow-200 transition">Phòng</a></li>
-        <li><a href="#services" class="hover:text-yellow-200 transition">Dịch Vụ</a></li>
-        <li><a href="#contact" class="hover:text-yellow-200 transition">Liên Hệ</a></li>
-      </ul>
     </div>
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-[#1a3c34] text-yellow-400">
       <ul class="flex flex-col space-y-4 p-4">
-        <li><a href="#home" class="hover:text-yellow-200 transition">Trang Chủ</a></li>
-        <li><a href="#about" class="hover:text-yellow-200 transition">Giới Thiệu</a></li>
-        <li><a href="#rooms" class="hover:text-yellow-200 transition">Phòng</a></li>
-        <li><a href="#services" class="hover:text-yellow-200 transition">Dịch Vụ</a></li>
-        <li><a href="#contact" class="hover:text-yellow-200 transition">Liên Hệ</a></li>
+        <li><a href="#home" class="hover:text-yellow-200 transition" data-translate="nav_home">Trang Chủ</a></li>
+        <li><a href="#about" class="hover:text-yellow-200 transition" data-translate="nav_about">Giới Thiệu</a></li>
+        <li><a href="#rooms" class="hover:text-yellow-200 transition" data-translate="nav_rooms">Phòng</a></li>
+        <li><a href="#services" class="hover:text-yellow-200 transition" data-translate="nav_services">Dịch Vụ</a></li>
+        <li><a href="#contact" class="hover:text-yellow-200 transition" data-translate="nav_contact">Liên Hệ</a></li>
+        <li class="flex space-x-2">
+          <button id="mobile-lang-toggle-vi" class="lang-toggle active">VI</button>
+          <button id="mobile-lang-toggle-en" class="lang-toggle">EN</button>
+        </li>
       </ul>
     </div>
   </nav>
@@ -139,9 +174,8 @@
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
     <div class="container mx-auto h-full flex items-center justify-center relative z-10">
       <div class="text-center text-white animate-fadeInUp">
-        <h2 class="text-5xl font-['Lora'] font-bold mb-6">Chào Mừng Đến Với Khách Sạn Nhật Hoàng</h2>
-        <p class="text-xl mb-8">Trải nghiệm sự thoải mái và dịch vụ tuyệt vời tại khách sạn của chúng tôi!</p>
-        <!-- <a href="#contact" class="bg-yellow-400 text-[#1a3c34] px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition duration-300">Đặt Phòng Ngay</a> -->
+        <h2 class="text-5xl font-['Lora'] font-bold mb-6" data-translate="hero_title">Chào Mừng Đến Với Khách Sạn Nhật Hoàng</h2>
+        <p class="text-xl mb-8" data-translate="hero_subtitle">Trải nghiệm sự thoải mái và dịch vụ tuyệt vời tại khách sạn của chúng tôi!</p>
       </div>
     </div>
   </section>
@@ -149,8 +183,8 @@
   <!-- About Section -->
   <section id="about" class="py-20 bg-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Giới Thiệu</h2>
-      <p class="text-lg text-gray-600 text-center max-w-5xl mx-auto leading-relaxed">
+      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10" data-translate="about_title">Giới Thiệu</h2>
+      <p class="text-lg text-gray-600 text-center max-w-5xl mx-auto leading-relaxed" data-translate="about_content">
         Khách sạn Nhật Hoàng là nơi lý tưởng để nghỉ ngơi và thư giãn, chỉ cách sân bay 15 phút di chuyển. Với vị trí thuận lợi và dịch vụ tận tâm, chúng tôi cam kết mang đến cho bạn trải nghiệm tuyệt vời nhất.
       </p>
     </div>
@@ -159,35 +193,35 @@
   <!-- Rooms Section -->
   <section id="rooms" class="bg-gray-100 py-20">
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Các Loại Phòng</h2>
+      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10" data-translate="rooms_title">Các Loại Phòng</h2>
       <div class="rooms-container">
         <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Phong doi.JPEG", "image/Hotel.jpg", "image/Phong doi.JPEG"]'>
           <img src="image/Phong doi.JPEG" alt="Phòng Thường" class="w-full h-60 object-cover rounded-lg mb-4">
-          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]">Phòng Thường</h3>
-          <p class="text-lg text-gray-600">Phòng thoải mái, đầy đủ tiện nghi.</p>
-          <p class="text-yellow-400 font-bold mt-2 text-xl">280.000 VNĐ/đêm</p>
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_standard_title">Phòng Thường</h3>
+          <p class="text-lg text-gray-600" data-translate="room_standard_desc">Phòng thoải mái, đầy đủ tiện nghi.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_standard_price">280.000 VNĐ/đêm</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Phong doi.JPEG", "image/Phong doi.JPEG", "image/Phong doi.JPEG"]'>
           <img src="image/Phong doi.JPEG" alt="Phòng Cao Cấp" class="w-full h-60 object-cover rounded-lg mb-4">
-          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]">Phòng Cao Cấp</h3>
-          <p class="text-lg text-gray-600">Phòng rộng rãi, có cửa sổ, thoáng mát.</p>
-          <p class="text-yellow-400 font-bold mt-2 text-xl">300.000 VNĐ/đêm</p>
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_deluxe_title">Phòng Cao Cấp</h3>
+          <p class="text-lg text-gray-600" data-translate="room_deluxe_desc">Phòng rộng rãi, có cửa sổ, thoáng mát.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_deluxe_price">300.000 VNĐ/đêm</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Phong doi.JPEG", "image/Phong doi.JPEG", "image/Phong doi.JPEG"]'>
           <img src="image/Phong doi.JPEG" alt="Phòng VIP" class="w-full h-60 object-cover rounded-lg mb-4">
-          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]">Phòng VIP</h3>
-          <p class="text-lg text-gray-600">Phòng sang trọng với dịch vụ cao cấp.</p>
-          <p class="text-yellow-400 font-bold mt-2 text-xl">350.000 VNĐ/đêm</p>
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_vip_title">Phòng VIP</h3>
+          <p class="text-lg text-gray-600" data-translate="room_vip_desc">Phòng sang trọng với dịch vụ cao cấp.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_vip_price">350.000 VNĐ/đêm</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Phong doi.JPEG", "image/Phong doi.JPEG", "image/Phong doi.JPEG"]'>
           <img src="image/Phong doi.JPEG" alt="Thuê Dài Hạn" class="w-full h-60 object-cover rounded-lg mb-4">
-          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]">Thuê Dài Hạn</h3>
-          <p class="text-lg text-gray-600">Phòng tiện nghi với giá ưu đãi cho thuê dài hạn.</p>
-          <p class="text-yellow-400 font-bold mt-2 text-xl">Liên hệ để biết giá</p>
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_longterm_title">Thuê Dài Hạn</h3>
+          <p class="text-lg text-gray-600" data-translate="room_longterm_desc">Phòng tiện nghi với giá ưu đãi cho thuê dài hạn.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_longterm_price">Liên hệ để biết giá</p>
         </div>
       </div>
       <div class="text-center mt-10">
-        <a href="https://forms.gle/sSzBU4dHWUapnVEX6" class="bg-yellow-400 text-[#1a3c34] px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition duration-300">Đặt Phòng Ngay</a>
+        <a href="https://forms.gle/sSzBU4dHWUapnVEX6" target="_blank" class="bg-yellow-400 text-[#1a3c34] px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition duration-300" data-translate="book_now">Đặt Phòng Ngay</a>
       </div>
     </div>
   </section>
@@ -195,19 +229,19 @@
   <!-- Services Section -->
   <section id="services" class="py-20 bg-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Dịch Vụ</h2>
+      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10" data-translate="services_title">Dịch Vụ</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="text-center p-6 bg-gray-50 rounded-xl card-hover">
-          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]">Wifi Miễn Phí</h3>
-          <p class="text-gray-600">Kết nối internet tốc độ cao.</p>
+          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="service_wifi_title">Wifi Miễn Phí</h3>
+          <p class="text-gray-600" data-translate="service_wifi_desc">Kết nối internet tốc độ cao.</p>
         </div>
         <div class="text-center p-6 bg-gray-50 rounded-xl card-hover">
-          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]">Dịch Vụ Phòng 24/7</h3>
-          <p class="text-gray-600">Hỗ trợ khách hàng nhanh chóng.</p>
+          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="service_room_title">Dịch Vụ Phòng 24/7</h3>
+          <p class="text-gray-600" data-translate="service_room_desc">Hỗ trợ khách hàng nhanh chóng.</p>
         </div>
         <div class="text-center p-6 bg-gray-50 rounded-xl card-hover">
-          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]">Massage</h3>
-          <p class="text-gray-600">Thư giãn với các liệu pháp massage chuyên nghiệp.</p>
+          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="service_massage_title">Massage</h3>
+          <p class="text-gray-600" data-translate="service_massage_desc">Thư giãn với các liệu pháp massage chuyên nghiệp.</p>
         </div>
       </div>
     </div>
@@ -216,13 +250,13 @@
   <!-- Contact Section -->
   <section id="contact" class="bg-gray-100 py-20">
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Liên Hệ</h2>
+      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10" data-translate="contact_title">Liên Hệ</h2>
       <div class="max-w-2xl mx-auto text-center">
-        <p class="text-gray-700 mb-4">Địa chỉ: B23A1, Đ. Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Vietnam</p>
-        <p class="text-gray-700 mb-4">Điện thoại: +84 28 6287 4596</p>
-        <p class="text-gray-700 mb-4">Email: contact@yourhotel.com</p>
+        <p class="text-gray-700 mb-4" data-translate="contact_address">Địa chỉ: B23A1, Đ. Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Vietnam</p>
+        <p class="text-gray-700 mb-4" data-translate="contact_phone">Điện thoại: +84 28 6287 4596</p>
+        <p class="text-gray-700 mb-4" data-translate="contact_email">Email: contact@yourhotel.com</p>
         <div class="mt-6">
-          <a href="mailto:contact@yourhotel.com" class="bg-[#1a3c34] text-yellow-400 px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#2a5c4a] transition duration-300">Gửi Email</a>
+          <a href="mailto:contact@yourhotel.com" class="bg-[#1a3c34] text-yellow-400 px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#2a5c4a] transition duration-300" data-translate="send_email">Gửi Email</a>
         </div>
       </div>
     </div>
@@ -241,11 +275,129 @@
   <!-- Footer -->
   <footer class="bg-[#1a3c34] text-yellow-400 py-8">
     <div class="container mx-auto text-center">
-      <p>&copy; 2025 Nhật Hoàng Hotel. All rights reserved.</p>
+      <p data-translate="footer_text">&copy; 2025 Nhật Hoàng Hotel. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
+    // Translations object
+    const translations = {
+      vi: {
+        hotel_name: "Nhật Hoàng Hotel",
+        nav_home: "Trang Chủ",
+        nav_about: "Giới Thiệu",
+        nav_rooms: "Phòng",
+        nav_services: "Dịch Vụ",
+        nav_contact: "Liên Hệ",
+        hero_title: "Chào Mừng Đến Với Khách Sạn Nhật Hoàng",
+        hero_subtitle: "Trải nghiệm sự thoải mái và dịch vụ tuyệt vời tại khách sạn của chúng tôi!",
+        book_now: "Đặt Phòng Ngay",
+        about_title: "Giới Thiệu",
+        about_content: "Khách sạn Nhật Hoàng là nơi lý tưởng để nghỉ ngơi và thư giãn, chỉ cách sân bay 15 phút di chuyển. Với vị trí thuận lợi và dịch vụ tận tâm, chúng tôi cam kết mang đến cho bạn trải nghiệm tuyệt vời nhất.",
+        rooms_title: "Các Loại Phòng",
+        room_standard_title: "Phòng Thường",
+        room_standard_desc: "Phòng thoải mái, đầy đủ tiện nghi.",
+        room_standard_price: "280.000 VNĐ/đêm",
+        room_deluxe_title: "Phòng Cao Cấp",
+        room_deluxe_desc: "Phòng rộng rãi, có cửa sổ, thoáng mát.",
+        room_deluxe_price: "300.000 VNĐ/đêm",
+        room_vip_title: "Phòng VIP",
+        room_vip_desc: "Phòng sang trọng với dịch vụ cao cấp.",
+        room_vip_price: "350.000 VNĐ/đêm",
+        room_longterm_title: "Thuê Dài Hạn",
+        room_longterm_desc: "Phòng tiện nghi với giá ưu đãi cho thuê dài hạn.",
+        room_longterm_price: "Liên hệ để biết giá",
+        services_title: "Dịch Vụ",
+        service_wifi_title: "Wifi Miễn Phí",
+        service_wifi_desc: "Kết nối internet tốc độ cao.",
+        service_room_title: "Dịch Vụ Phòng 24/7",
+        service_room_desc: "Hỗ trợ khách hàng nhanh chóng.",
+        service_massage_title: "Massage",
+        service_massage_desc: "Thư giãn với các liệu pháp massage chuyên nghiệp.",
+        contact_title: "Liên Hệ",
+        contact_address: "Địa chỉ: B23A1, Đ. Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Vietnam",
+        contact_phone: "Điện thoại: +84 28 6287 4596",
+        contact_email: "Email: contact@yourhotel.com",
+        send_email: "Gửi Email",
+        footer_text: "&copy; 2025 Nhật Hoàng Hotel. Mọi quyền được bảo lưu."
+      },
+      en: {
+        hotel_name: "Nhật Hoàng Hotel",
+        nav_home: "Home",
+        nav_about: "About",
+        nav_rooms: "Rooms",
+        nav_services: "Services",
+        nav_contact: "Contact",
+        hero_title: "Welcome to Nhật Hoàng Hotel",
+        hero_subtitle: "Experience comfort and exceptional service at our hotel!",
+        book_now: "Book Now",
+        about_title: "About",
+        about_content: "Nhật Hoàng Hotel is the ideal place for rest and relaxation, just 15 minutes from the airport. With a convenient location and dedicated service, we are committed to providing you with the best experience.",
+        rooms_title: "Room Types",
+        room_standard_title: "Standard Room",
+        room_standard_desc: "Comfortable room with full amenities.",
+        room_standard_price: "280,000 VND/night",
+        room_deluxe_title: "Deluxe Room",
+        room_deluxe_desc: "Spacious room with windows, airy and bright.",
+        room_deluxe_price: "300,000 VND/night",
+        room_vip_title: "VIP Room",
+        room_vip_desc: "Luxurious room with premium services.",
+        room_vip_price: "350,000 VND/night",
+        room_longterm_title: "Long-Term Rental",
+        room_longterm_desc: "Comfortable room with special rates for long-term stays.",
+        room_longterm_price: "Contact for pricing",
+        services_title: "Services",
+        service_wifi_title: "Free Wi-Fi",
+        service_wifi_desc: "High-speed internet connection.",
+        service_room_title: "24/7 Room Service",
+        service_room_desc: "Prompt customer support.",
+        service_massage_title: "Massage",
+        service_massage_desc: "Relax with professional massage therapies.",
+        contact_title: "Contact",
+        contact_address: "Address: B23A1, Nguyễn Văn Quá Street, Đông Hưng Thuận, District 12, Ho Chi Minh City, Vietnam",
+        contact_phone: "Phone: +84 28 6287 4596",
+        contact_email: "Email: contact@yourhotel.com",
+        send_email: "Send Email",
+        footer_text: "&copy; 2025 Nhật Hoàng Hotel. All rights reserved."
+      }
+    };
+
+    // Function to update text and button states based on selected language
+    function updateLanguage(lang) {
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        element.innerHTML = translations[lang][key];
+      });
+      document.documentElement.lang = lang;
+      document.title = translations[lang].hotel_name;
+      // Update button states
+      document.getElementById('lang-toggle-vi').classList.toggle('active', lang === 'vi');
+      document.getElementById('lang-toggle-en').classList.toggle('active', lang === 'en');
+      document.getElementById('mobile-lang-toggle-vi').classList.toggle('active', lang === 'vi');
+      document.getElementById('mobile-lang-toggle-en').classList.toggle('active', lang === 'en');
+      localStorage.setItem('language', lang);
+    }
+
+    // Load saved language or default to Vietnamese
+    const savedLang = localStorage.getItem('language') || 'vi';
+    updateLanguage(savedLang);
+
+    // Language toggle buttons
+    document.getElementById('lang-toggle-vi').addEventListener('click', () => {
+      updateLanguage('vi');
+    });
+    document.getElementById('lang-toggle-en').addEventListener('click', () => {
+      updateLanguage('en');
+    });
+    document.getElementById('mobile-lang-toggle-vi').addEventListener('click', () => {
+      updateLanguage('vi');
+      document.getElementById('mobile-menu').classList.add('hidden');
+    });
+    document.getElementById('mobile-lang-toggle-en').addEventListener('click', () => {
+      updateLanguage('en');
+      document.getElementById('mobile-menu').classList.add('hidden');
+    });
+
     // Hamburger menu toggle
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -260,7 +412,6 @@
         document.querySelector(this.getAttribute('href')).scrollIntoView({
           behavior: 'smooth'
         });
-        // Close mobile menu after clicking a link
         mobileMenu.classList.add('hidden');
       });
     });
@@ -277,7 +428,6 @@
 
     roomCards.forEach(card => {
       card.addEventListener('click', (e) => {
-        // Only trigger modal if the click is not on the "Book Now" button
         if (!e.target.closest('a')) {
           currentImages = JSON.parse(card.getAttribute('data-images'));
           currentImageIndex = 0;
@@ -301,7 +451,6 @@
       modalImage.src = currentImages[currentImageIndex];
     });
 
-    // Close modal when clicking outside the image
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         modal.style.display = 'none';
