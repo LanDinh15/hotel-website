@@ -141,7 +141,7 @@
       <div class="text-center text-white animate-fadeInUp">
         <h2 class="text-5xl font-['Lora'] font-bold mb-6">Chào Mừng Đến Với Khách Sạn Nhật Hoàng</h2>
         <p class="text-xl mb-8">Trải nghiệm sự thoải mái và dịch vụ tuyệt vời tại khách sạn của chúng tôi!</p>
-        <a href="#contact" class="bg-yellow-400 text-[#1a3c34] px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition duration-300">Đặt Phòng Ngay</a>
+        <!-- <a href="#contact" class="bg-yellow-400 text-[#1a3c34] px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition duration-300">Đặt Phòng Ngay</a> -->
       </div>
     </div>
   </section>
@@ -150,7 +150,7 @@
   <section id="about" class="py-20 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Giới Thiệu</h2>
-      <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto leading-relaxed">
+      <p class="text-lg text-gray-600 text-center max-w-5xl mx-auto leading-relaxed">
         Khách sạn Nhật Hoàng là nơi lý tưởng để nghỉ ngơi và thư giãn, chỉ cách sân bay 15 phút di chuyển. Với vị trí thuận lợi và dịch vụ tận tâm, chúng tôi cam kết mang đến cho bạn trải nghiệm tuyệt vời nhất.
       </p>
     </div>
@@ -185,6 +185,9 @@
           <p class="text-lg text-gray-600">Phòng tiện nghi với giá ưu đãi cho thuê dài hạn.</p>
           <p class="text-yellow-400 font-bold mt-2 text-xl">Liên hệ để biết giá</p>
         </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="https://forms.gle/sSzBU4dHWUapnVEX6" class="bg-yellow-400 text-[#1a3c34] px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition duration-300">Đặt Phòng Ngay</a>
       </div>
     </div>
   </section>
@@ -273,11 +276,14 @@
     let currentImageIndex = 0;
 
     roomCards.forEach(card => {
-      card.addEventListener('click', () => {
-        currentImages = JSON.parse(card.getAttribute('data-images'));
-        currentImageIndex = 0;
-        modalImage.src = currentImages[currentImageIndex];
-        modal.style.display = 'flex';
+      card.addEventListener('click', (e) => {
+        // Only trigger modal if the click is not on the "Book Now" button
+        if (!e.target.closest('a')) {
+          currentImages = JSON.parse(card.getAttribute('data-images'));
+          currentImageIndex = 0;
+          modalImage.src = currentImages[currentImageIndex];
+          modal.style.display = 'flex';
+        }
       });
     });
 
