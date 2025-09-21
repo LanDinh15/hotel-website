@@ -5,116 +5,302 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nhật Hoàng Hotel</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Custom animation for hero section */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 1s ease-out;
+    }
+    /* Hover effect for cards */
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    /* Horizontal scroll for rooms section */
+    .rooms-container {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .rooms-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    .rooms-container::-webkit-scrollbar-thumb {
+      background-color: #1a3c34;
+      border-radius: 4px;
+    }
+    .rooms-container > div {
+      flex: 0 0 400px; /* Increased card width */
+      scroll-snap-align: start;
+      margin-right: 1.5rem; /* Space between cards */
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      max-width: 90%;
+      max-height: 80%;
+      position: relative;
+    }
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .modal-close, .modal-prev, .modal-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+    }
+    .modal-close {
+      top: 20px;
+      right: 20px;
+      transform: none;
+    }
+    .modal-prev {
+      left: 20px;
+    }
+    .modal-next {
+      right: 20px;
+    }
+  </style>
 </head>
-<body class="bg-[#1a3c34] text-yellow-400 font-sans">
+<body class="bg-[#f5f5f5] text-gray-800 font-['Roboto']">
   <!-- Navigation -->
-  <nav class="bg-[#1a3c34] text-yellow-400 p-4 sticky top-0">
+  <nav class="bg-[#1a3c34] text-yellow-400 p-4 sticky top-0 z-50 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Nhật Hoàng Hotel</h1>
-      <ul class="flex space-x-6">
-        <li><a href="#home" class="hover:underline">Trang Chủ</a></li>
-        <li><a href="#about" class="hover:underline">Giới Thiệu</a></li>
-        <li><a href="#rooms" class="hover:underline">Phòng</a></li>
-        <li><a href="#services" class="hover:underline">Dịch Vụ</a></li>
-        <li><a href="#contact" class="hover:underline">Liên Hệ</a></li>
+      <h1 class="text-3xl font-['Lora'] font-bold">Nhật Hoàng Hotel</h1>
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-yellow-400 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+      <ul id="nav-menu" class="hidden md:flex space-x-6 text-lg">
+        <li><a href="#home" class="hover:text-yellow-200 transition">Trang Chủ</a></li>
+        <li><a href="#about" class="hover:text-yellow-200 transition">Giới Thiệu</a></li>
+        <li><a href="#rooms" class="hover:text-yellow-200 transition">Phòng</a></li>
+        <li><a href="#services" class="hover:text-yellow-200 transition">Dịch Vụ</a></li>
+        <li><a href="#contact" class="hover:text-yellow-200 transition">Liên Hệ</a></li>
+      </ul>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#1a3c34] text-yellow-400">
+      <ul class="flex flex-col space-y-4 p-4">
+        <li><a href="#home" class="hover:text-yellow-200 transition">Trang Chủ</a></li>
+        <li><a href="#about" class="hover:text-yellow-200 transition">Giới Thiệu</a></li>
+        <li><a href="#rooms" class="hover:text-yellow-200 transition">Phòng</a></li>
+        <li><a href="#services" class="hover:text-yellow-200 transition">Dịch Vụ</a></li>
+        <li><a href="#contact" class="hover:text-yellow-200 transition">Liên Hệ</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="relative bg-cover bg-center h-96" style="background-image: url('image/Hotel.jpg')">
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-    <!-- Content -->
+  <section id="home" class="relative bg-cover bg-center h-[600px]" style="background-image: url('image/Phong doi.JPEG')">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
     <div class="container mx-auto h-full flex items-center justify-center relative z-10">
-      <div class="text-center text-white">
-        <h2 class="text-4xl font-bold mb-4">Chào Mừng Đến Với Khách Sạn Nhật Hoàng</h2>
-        <!--<p class="text-lg mb-6">Trải nghiệm sự thoải mái và dịch vụ tuyệt vời tại khách sạn của chúng tôi!</p>-->
-        <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Đặt Phòng Ngay</a>
+      <div class="text-center text-white animate-fadeInUp">
+        <h2 class="text-5xl font-['Lora'] font-bold mb-6">Chào Mừng Đến Với Khách Sạn Nhật Hoàng</h2>
+        <p class="text-xl mb-8">Trải nghiệm sự thoải mái và dịch vụ tuyệt vời tại khách sạn của chúng tôi!</p>
+        <a href="#contact" class="bg-yellow-400 text-[#1a3c34] px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition duration-300">Đặt Phòng Ngay</a>
       </div>
     </div>
   </section>
-  
 
   <!-- About Section -->
-  <section id="about" class="py-16">
+  <section id="about" class="py-20 bg-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8">Giới Thiệu</h2>
-      <p class="text-lg text-yellow-400 text-center max-w-2xl mx-auto">
-        Khách sạn của chúng tôi là nơi lý tưởng để nghỉ ngơi và thư giãn. Với vị trí thuận lợi và dịch vụ tận tâm,
-        chúng tôi cam kết mang đến cho bạn trải nghiệm tuyệt vời nhất.
+      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Giới Thiệu</h2>
+      <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto leading-relaxed">
+        Khách sạn Nhật Hoàng là nơi lý tưởng để nghỉ ngơi và thư giãn, chỉ cách sân bay 15 phút di chuyển. Với vị trí thuận lợi và dịch vụ tận tâm, chúng tôi cam kết mang đến cho bạn trải nghiệm tuyệt vời nhất.
       </p>
     </div>
   </section>
 
   <!-- Rooms Section -->
-  <section id="rooms" class="bg-gray-200 py-16">
+  <section id="rooms" class="bg-gray-100 py-20">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8">Các Loại Phòng</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-lg shadow-lg p-6">
-          <img src="image/Phong doi.JPEG" alt="Phòng Thường" class="w-full h-48 object-cover rounded mb-4">
-          <h3 class="text-xl font-bold">Phòng Thường</h3>
-          <p class="text-gray-600">Phòng thoải mái, đầy đủ tiện nghi.</p>
-          <p class="text-blue-600 font-bold mt-2">280.000 VNĐ/đêm</p>
+      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Các Loại Phòng</h2>
+      <div class="rooms-container">
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Phong doi.JPEG", "image/Hotel.jpg", "image/Phong doi.JPEG"]'>
+          <img src="image/Phong doi.JPEG" alt="Phòng Thường" class="w-full h-60 object-cover rounded-lg mb-4">
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]">Phòng Thường</h3>
+          <p class="text-lg text-gray-600">Phòng thoải mái, đầy đủ tiện nghi.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl">280.000 VNĐ/đêm</p>
         </div>
-        <div class="bg-white rounded-lg shadow-lg p-6">
-          <img src="image/Phong doi.JPEG" alt="Phòng Cao Cấp" class="w-full h-48 object-cover rounded mb-4">
-          <h3 class="text-xl font-bold">Phòng Cao Cấp</h3>
-          <p class="text-gray-600">Phòng rộng rãi, có cửa sổ, thoáng mát.</p>
-          <p class="text-blue-600 font-bold mt-2">300.000 VNĐ/đêm</p>
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Phong doi.JPEG", "image/Phong doi.JPEG", "image/Phong doi.JPEG"]'>
+          <img src="image/Phong doi.JPEG" alt="Phòng Cao Cấp" class="w-full h-60 object-cover rounded-lg mb-4">
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]">Phòng Cao Cấp</h3>
+          <p class="text-lg text-gray-600">Phòng rộng rãi, có cửa sổ, thoáng mát.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl">300.000 VNĐ/đêm</p>
         </div>
-        <div class="bg-white rounded-lg shadow-lg p-6">
-          <img src="image/Phong doi.JPEG" alt="Phòng tình yêu" class="w-full h-48 object-cover rounded mb-4">
-          <h3 class="text-xl font-bold">Phòng VIP</h3>
-          <p class="text-gray-600">Phòng sang trọng với dịch vụ cao cấp.</p>
-          <p class="text-blue-600 font-bold mt-2">350.000 VNĐ/đêm</p>
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Phong doi.JPEG", "image/Phong doi.JPEG", "image/Phong doi.JPEG"]'>
+          <img src="image/Phong doi.JPEG" alt="Phòng VIP" class="w-full h-60 object-cover rounded-lg mb-4">
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]">Phòng VIP</h3>
+          <p class="text-lg text-gray-600">Phòng sang trọng với dịch vụ cao cấp.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl">350.000 VNĐ/đêm</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Phong doi.JPEG", "image/Phong doi.JPEG", "image/Phong doi.JPEG"]'>
+          <img src="image/Phong doi.JPEG" alt="Thuê Dài Hạn" class="w-full h-60 object-cover rounded-lg mb-4">
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]">Thuê Dài Hạn</h3>
+          <p class="text-lg text-gray-600">Phòng tiện nghi với giá ưu đãi cho thuê dài hạn.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl">Liên hệ để biết giá</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Services Section -->
-  <section id="services" class="py-16">
+  <section id="services" class="py-20 bg-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8">Dịch Vụ</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <h3 class="text-xl font-bold">Wifi Miễn Phí</h3>
-          <p class="text-gray-600">Kết nối internet tốc độ cao mọi lúc, mọi nơi.</p>
+      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Dịch Vụ</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="text-center p-6 bg-gray-50 rounded-xl card-hover">
+          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]">Wifi Miễn Phí</h3>
+          <p class="text-gray-600">Kết nối internet tốc độ cao.</p>
         </div>
-        <div class="text-center">
-          <h3 class="text-xl font-bold">Nhà Hàng</h3>
-          <p class="text-gray-600">Thưởng thức các món ăn ngon tại nhà hàng của chúng tôi.</p>
+        <div class="text-center p-6 bg-gray-50 rounded-xl card-hover">
+          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]">Dịch Vụ Phòng 24/7</h3>
+          <p class="text-gray-600">Hỗ trợ khách hàng nhanh chóng.</p>
         </div>
-        <div class="text-center">
-          <h3 class="text-xl font-bold">Dịch Vụ Phòng 24/7</h3>
-          <p class="text-gray-600">Hỗ trợ khách hàng mọi lúc, mọi nơi.</p>
+        <div class="text-center p-6 bg-gray-50 rounded-xl card-hover">
+          <h3 class="text-2xl font-['Lora'] font-bold text-[#1a3c34]">Massage</h3>
+          <p class="text-gray-600">Thư giãn với các liệu pháp massage chuyên nghiệp.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="bg-gray-200 py-16">
+  <section id="contact" class="bg-gray-100 py-20">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8">Liên Hệ</h2>
-      <div class="max-w-lg mx-auto">
+      <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10">Liên Hệ</h2>
+      <div class="max-w-2xl mx-auto text-center">
         <p class="text-gray-700 mb-4">Địa chỉ: B23A1, Đ. Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Vietnam</p>
         <p class="text-gray-700 mb-4">Điện thoại: +84 28 6287 4596</p>
         <p class="text-gray-700 mb-4">Email: contact@yourhotel.com</p>
         <div class="mt-6">
-          <a href="mailto:contact@yourhotel.com" class="bg-[#1a3c34] text-yellow-400 px-6 py-3 rounded hover:bg-blue-700">Gửi Email</a>
+          <a href="mailto:contact@yourhotel.com" class="bg-[#1a3c34] text-yellow-400 px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#2a5c4a] transition duration-300">Gửi Email</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Modal for Image Gallery -->
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <span class="modal-prev">&larr;</span>
+      <img id="modalImage" src="" alt="Room Image">
+      <span class="modal-next">&rarr;</span>
+    </div>
+  </div>
+
   <!-- Footer -->
-  <footer class="bg-[#1a3c34] text-yellow-400 py-4">
+  <footer class="bg-[#1a3c34] text-yellow-400 py-8">
     <div class="container mx-auto text-center">
       <p>&copy; 2025 Nhật Hoàng Hotel. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+        // Close mobile menu after clicking a link
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Image gallery modal functionality
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalClose = document.querySelector('.modal-close');
+    const modalPrev = document.querySelector('.modal-prev');
+    const modalNext = document.querySelector('.modal-next');
+    const roomCards = document.querySelectorAll('.card-hover');
+    let currentImages = [];
+    let currentImageIndex = 0;
+
+    roomCards.forEach(card => {
+      card.addEventListener('click', () => {
+        currentImages = JSON.parse(card.getAttribute('data-images'));
+        currentImageIndex = 0;
+        modalImage.src = currentImages[currentImageIndex];
+        modal.style.display = 'flex';
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    modalPrev.addEventListener('click', () => {
+      currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+      modalImage.src = currentImages[currentImageIndex];
+    });
+
+    modalNext.addEventListener('click', () => {
+      currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+      modalImage.src = currentImages[currentImageIndex];
+    });
+
+    // Close modal when clicking outside the image
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
