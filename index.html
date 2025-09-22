@@ -33,6 +33,13 @@
       transform: translateY(-10px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
+    .map-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .map-hover:hover {
+      transform: scale(1.03); /* Slight zoom-in */
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
+    }
     /* Horizontal scroll for rooms section */
     .rooms-container {
       display: flex;
@@ -248,15 +255,31 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="bg-gray-100 py-20">
+  <section id="contact" class="bg-gray-50 py-20">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10" data-translate="contact_title">Liên Hệ</h2>
-      <div class="max-w-2xl mx-auto text-center">
-        <p class="text-gray-700 mb-4" data-translate="contact_address">Địa chỉ: B23A1, Đ. Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Vietnam</p>
-        <p class="text-gray-700 mb-4" data-translate="contact_phone">Điện thoại: +84 28 6287 4596</p>
-        <p class="text-gray-700 mb-4" data-translate="contact_email">Email: contact@yourhotel.com</p>
-        <div class="mt-6">
-          <a href="mailto:contact@yourhotel.com" class="bg-[#1a3c34] text-yellow-400 px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#2a5c4a] transition duration-300" data-translate="send_email">Gửi Email</a>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        
+        <!-- Left Column: Contact Info Card -->
+        <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col justify-center space-y-4 text-center md:text-left card-hover">
+          <p class="text-gray-700 text-right" data-translate="contact_address">Địa chỉ: B23A1, Đ. Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Vietnam</p>
+          <p class="text-gray-700 text-right" data-translate="contact_phone">Điện thoại: +84 28 6287 4596</p>
+          <p class="text-gray-700 text-right" data-translate="contact_email">Email: contact@yourhotel.com</p>
+          <div class="text-right mt-4">
+            <a href="mailto:contact@yourhotel.com" class="bg-[#1a3c34] text-yellow-400 px-4 py-2 rounded-full font-semibold text-base hover:bg-[#2a5c4a] transition duration-300" data-translate="send_email">Gửi Email</a>
+          </div>
+        </div>
+        <!-- Right Column: Google Map Card -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden h-96 map-hover">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125395.10547547259!2d106.54805979864442!3d10.842117385987802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529121daae5cf%3A0x60af2f0774aba350!2zS2jDoWNoIHPhuqFuIE5o4bqtdCBIb8Ogbmc!5e0!3m2!1sen!2sca!4v1758580863436!5m2!1sen!2sca"
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
       </div>
     </div>
@@ -354,7 +377,7 @@
         service_massage_title: "Massage",
         service_massage_desc: "Relax with professional massage therapies.",
         contact_title: "Contact",
-        contact_address: "Address: B23A1, Nguyễn Văn Quá Street, Đông Hưng Thuận, District 12, Ho Chi Minh City, Vietnam",
+        contact_address: "Address: B23A1, Nguyễn Văn Quá Street, Đông Hưng Thuận Ward, District 12, Ho Chi Minh City, Vietnam",
         contact_phone: "Phone: +84 28 6287 4596",
         contact_email: "Email: contact@yourhotel.com",
         send_email: "Send Email",
