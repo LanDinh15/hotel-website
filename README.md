@@ -24,9 +24,22 @@ https://landinh15.github.io/hotel-website/
 ## 🚀 Installation / Setup
 1. Clone the repository:
 ```bash
-git clone https://github.com/LanDinh15/nhathoanghotel.git
+git clone https://github.com/LanDinh15/hotel-website.git
 ```
 2. Open `index.html` in a browser.
 3. Ensure the `image/` folder contains all required images (`Room.JPEG`, `Hotel.jpg`, etc.).
 4. Optional: Deploy on GitHub Pages via repository settings.
+
+## 📂 Folder Structure
+```bash
+nhathoanghotel/
+│
+├─ index.html
+├─ README.md
+├─ image/           
+```
+
+
+
+
 
