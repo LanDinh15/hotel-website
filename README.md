@@ -46,9 +46,14 @@ nhathoanghotel/
 
 <img width="1400" height="801" alt="Screenshot 2025-09-22 at 5 17 19 PM" src="https://github.com/user-attachments/assets/ffadf624-5f7d-4459-aa78-fbb25dac7f42" />
 
+## 📞 Contact
+- **Author**: Lan Dinh
+- **Email**: landinh.515@gmail.com
+
 
 ## 📄 License
 This project is licensed under the **MIT License**.
+
 
 
 
