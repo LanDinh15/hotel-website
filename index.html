@@ -73,15 +73,21 @@
       z-index: 100;
       justify-content: center;
       align-items: center;
+      overflow: auto;
     }
     .modal-content {
       max-width: 90%;
       max-height: 80%;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
     }
     .modal-content img {
-      width: 100%;
-      height: auto;
+      width: auto;
+      max-width: 100%;
+      max-height: 80vh;
       object-fit: contain;
       border-radius: 8px;
     }
@@ -177,8 +183,8 @@
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="relative bg-cover bg-center h-[600px]" style="background-image: url('image/Room.JPEG')">
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  <section id="home" class="relative bg-cover bg-center h-[600px]" style="background-image: url('image/vip-room.jpg')">
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
     <div class="container mx-auto h-full flex items-center justify-center relative z-10">
       <div class="text-center text-white animate-fadeInUp">
         <h2 class="text-5xl font-['Lora'] font-bold mb-6" data-translate="hero_title">Chào Mừng Đến Với Khách Sạn Nhật Hoàng</h2>
@@ -202,25 +208,26 @@
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-['Lora'] font-bold text-center text-[#1a3c34] mb-10" data-translate="rooms_title">Các Loại Phòng</h2>
       <div class="rooms-container">
-        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Room.JPEG", "image/Hotel.jpg", "image/Room.JPEG"]'>
-          <img src="image/Room.JPEG" alt="Phòng Thường" class="w-full h-60 object-cover rounded-lg mb-4">
-          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_standard_title">Phòng Thường</h3>
-          <p class="text-lg text-gray-600" data-translate="room_standard_desc">Phòng thoải mái, đầy đủ tiện nghi.</p>
-          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_standard_price">280.000 VNĐ/đêm</p>
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/STR-1.JPG","image/toilet1.JPG","image/toilet2.jpg"]'>
+          <img src="image/small-standard-room.JPG" alt="Phòng Tiêu Chuẩn Nhỏ" class="w-full h-60 object-cover rounded-lg mb-4">
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_smallstandard_title">Phòng Tiêu Chuẩn Nhỏ</h3>
+          <p class="text-lg text-gray-600" data-translate="room_smallstandard_desc">Phòng thoải mái, đầy đủ tiện nghi.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_smallstandard_price_hour">80.000 VNĐ/2h</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_smallstandard_price">280.000 VNĐ/đêm</p>
         </div>
-        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Room.JPEG", "image/Room.JPEG", "image/Room.JPEG"]'>
-          <img src="image/Room.JPEG" alt="Phòng Cao Cấp" class="w-full h-60 object-cover rounded-lg mb-4">
-          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_deluxe_title">Phòng Cao Cấp</h3>
-          <p class="text-lg text-gray-600" data-translate="room_deluxe_desc">Phòng rộng rãi, có cửa sổ, thoáng mát.</p>
-          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_deluxe_price">300.000 VNĐ/đêm</p>
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/big-standard-room.JPG","image/BTR-1.jpg","image/toilet1.JPG","image/toilet2.jpg"]'>
+          <img src="image/big-standard-room.JPG" alt="Phòng Tiêu Chuẩn Lớn" class="w-full h-60 object-cover rounded-lg mb-4">
+          <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_bigstandard_title">Phòng Tiêu Chuẩn Lớn</h3>
+          <p class="text-lg text-gray-600" data-translate="room_bigstandard_desc">Phòng rộng rãi, có cửa sổ, thoáng mát.</p>
+          <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_bigstandard_price">300.000 VNĐ/đêm</p>
         </div>
-        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Room.JPEG", "iimage/Room.JPEG", "image/Room.JPEG"]'>
-          <img src="image/Room.JPEG" alt="Phòng VIP" class="w-full h-60 object-cover rounded-lg mb-4">
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/vip-room.JPG","image/vip-1.jpg"]'>
+          <img src="image/vip-room.jpg" alt="Phòng VIP" class="w-full h-60 object-cover rounded-lg mb-4">
           <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_vip_title">Phòng VIP</h3>
-          <p class="text-lg text-gray-600" data-translate="room_vip_desc">Phòng sang trọng với dịch vụ cao cấp.</p>
+          <p class="text-lg text-gray-600" data-translate="room_vip_desc">Phòng thiết kế sang trọng với bồn tắm rộng rãi.</p>
           <p class="text-yellow-400 font-bold mt-2 text-xl" data-translate="room_vip_price">350.000 VNĐ/đêm</p>
         </div>
-        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/Room.JPEG", "image/Room.JPEG", "image/Room.JPEG"]'>
+        <div class="bg-white rounded-xl shadow-lg p-6 card-hover" data-images='["image/STR-1.JPG"]'>
           <img src="image/Room.JPEG" alt="Thuê Dài Hạn" class="w-full h-60 object-cover rounded-lg mb-4">
           <h3 class="text-3xl font-['Lora'] font-bold text-[#1a3c34]" data-translate="room_longterm_title">Thuê Dài Hạn</h3>
           <p class="text-lg text-gray-600" data-translate="room_longterm_desc">Phòng tiện nghi với giá ưu đãi cho thuê dài hạn.</p>
@@ -318,14 +325,15 @@
         about_title: "Giới Thiệu",
         about_content: "Khách sạn Nhật Hoàng là nơi lý tưởng để nghỉ ngơi và thư giãn, chỉ cách sân bay 15 phút di chuyển. Với vị trí thuận lợi và dịch vụ tận tâm, chúng tôi cam kết mang đến cho bạn trải nghiệm tuyệt vời nhất.",
         rooms_title: "Các Loại Phòng",
-        room_standard_title: "Phòng Thường",
-        room_standard_desc: "Phòng thoải mái, đầy đủ tiện nghi.",
-        room_standard_price: "280.000 VNĐ/đêm",
-        room_deluxe_title: "Phòng Cao Cấp",
-        room_deluxe_desc: "Phòng rộng rãi, có cửa sổ, thoáng mát.",
-        room_deluxe_price: "300.000 VNĐ/đêm",
+        room_smallstandard_title: "Phòng Tiêu Chuẩn Nhỏ",
+        room_smallstandard_desc: "Phòng thoải mái, đầy đủ tiện nghi.",
+        room_smallstandard_price_hour:"80.000 VNĐ/2h",
+        room_smallstandard_price: "280.000 VNĐ/đêm",
+        room_bigstandard_title: "Phòng Tiêu Chuẩn Lớn",
+        room_bigstandard_desc: "Phòng rộng rãi, có cửa sổ, thoáng mát.",
+        room_bigstandard_price: "300.000 VNĐ/đêm",
         room_vip_title: "Phòng VIP",
-        room_vip_desc: "Phòng sang trọng với dịch vụ cao cấp.",
+        room_vip_desc: "Phòng thiết kế sang trọng với bồn tắm rộng rãi.",
         room_vip_price: "350.000 VNĐ/đêm",
         room_longterm_title: "Thuê Dài Hạn",
         room_longterm_desc: "Phòng tiện nghi với giá ưu đãi cho thuê dài hạn.",
@@ -357,15 +365,15 @@
         about_title: "About",
         about_content: "Nhật Hoàng Hotel is the ideal place for rest and relaxation, just 15 minutes from the airport. With a convenient location and dedicated service, we are committed to providing you with the best experience.",
         rooms_title: "Room Types",
-        room_standard_title: "Standard Room",
-        room_standard_desc: "Comfortable room with full amenities.",
-        room_standard_price: "280,000 VND/night",
-        room_deluxe_title: "Deluxe Room",
-        room_deluxe_desc: "Spacious room with windows, airy and bright.",
-        room_deluxe_price: "300,000 VND/night",
+        room_smallstandard_title: "Small Standard Room",
+        room_smallstandard_desc: "Comfortable room with full amenities.",
+        room_smallstandard_price: "280.000 VND/night",
+        room_bigstandard_title: "Big Standard Room",
+        room_bigstandard_desc: "Spacious room with windows, airy and bright.",
+        room_bigstandard_price: "300.000 VND/night",
         room_vip_title: "VIP Room",
-        room_vip_desc: "Luxurious room with premium services.",
-        room_vip_price: "350,000 VND/night",
+        room_vip_desc: "Luxurious room with spacious hottub.",
+        room_vip_price: "350.000 VND/night",
         room_longterm_title: "Long-Term Rental",
         room_longterm_desc: "Comfortable room with special rates for long-term stays.",
         room_longterm_price: "Contact for pricing",
