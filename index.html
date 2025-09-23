@@ -140,6 +140,14 @@
       color: #ffffff;
       border-color: #2a5c4a;
     }
+    /* Scrollerbar */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 <body class="bg-[#f5f5f5] text-gray-800 font-['Roboto']">
@@ -183,13 +191,52 @@
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="relative bg-cover bg-center h-[600px]" style="background-image: url('image/vip-room.jpg')">
-    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-    <div class="container mx-auto h-full flex items-center justify-center relative z-10">
-      <div class="text-center text-white animate-fadeInUp">
-        <h2 class="text-5xl font-['Lora'] font-bold mb-6" data-translate="hero_title">Chào Mừng Đến Với Khách Sạn Nhật Hoàng</h2>
-        <p class="text-xl mb-8" data-translate="hero_subtitle">Trải nghiệm sự thoải mái và dịch vụ tuyệt vời tại khách sạn của chúng tôi!</p>
+  <section id="home" class="relative h-[600px] overflow-hidden">
+    <!-- Horizontal scroll container -->
+    <div class="flex h-full overflow-x-auto scroll-snap-x scroll-snap-mandatory scrollbar-hide" id="hero-slider">
+      
+      <!-- Slide 1 -->
+      <div class="relative flex-shrink-0 w-full h-full scroll-snap-align-start bg-cover bg-center" style="background-image: url('image/vip-room.jpg')">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
+          <h2 class="text-4xl md:text-5xl font-['Lora'] font-bold mb-6">Chào Mừng Đến Với Khách Sạn Nhật Hoàng</h2>
+          <p class="text-lg md:text-xl mb-8">Trải nghiệm sự thoải mái và dịch vụ tuyệt vời tại khách sạn của chúng tôi!</p>
+        </div>
       </div>
+
+      <!-- Slide 2 -->
+      <div class="relative flex-shrink-0 w-full h-full scroll-snap-align-start bg-cover bg-center" style="background-image: url('image/big-standard-room.JPG')">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
+          <h2 class="text-4xl md:text-5xl font-['Lora'] font-bold mb-6">Không Gian Rộng Rãi</h2>
+          <p class="text-lg md:text-xl mb-8">Phòng tiêu chuẩn lớn thoáng mát với cửa sổ sáng.</p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="relative flex-shrink-0 w-full h-full scroll-snap-align-start bg-cover bg-center" style="background-image: url('image/small-standard-room.JPG')">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
+          <h2 class="text-4xl md:text-5xl font-['Lora'] font-bold mb-6">Tiện Nghi Đầy Đủ</h2>
+          <p class="text-lg md:text-xl mb-8">Phòng nhỏ gọn, thoải mái, phù hợp cho chuyến đi ngắn.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Slider buttons -->
+    <button id="prev-slide" class="absolute top-1/2 left-3 md:left-6 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 md:p-3 hover:bg-opacity-70 transition">
+      &#10094;
+    </button>
+    <button id="next-slide" class="absolute top-1/2 right-3 md:right-6 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 md:p-3 hover:bg-opacity-70 transition">
+      &#10095;
+    </button>
+
+    <!-- Slide indicators -->
+    <div id="slider-indicators" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 md:space-x-3">
+      <span class="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full opacity-70 cursor-pointer" data-slide="0"></span>
+      <span class="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full opacity-40 cursor-pointer" data-slide="1"></span>
+      <span class="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full opacity-40 cursor-pointer" data-slide="2"></span>
     </div>
   </section>
 
@@ -310,6 +357,65 @@
   </footer>
 
   <script>
+    const slider = document.getElementById('hero-slider');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
+    const indicators = document.querySelectorAll('#slider-indicators span');
+
+    let currentIndex = 0;
+    let autoSlideInterval;
+    const totalSlides = indicators.length;
+
+    // Update indicator styles
+    function updateIndicators(index) {
+      indicators.forEach((dot, i) => {
+        dot.classList.toggle("opacity-70", i === index);
+        dot.classList.toggle("opacity-40", i !== index);
+      });
+    }
+
+    // Move to specific slide
+    function goToSlide(index) {
+      currentIndex = (index + totalSlides) % totalSlides;
+      slider.scrollTo({ left: currentIndex * window.innerWidth, behavior: 'smooth' });
+      updateIndicators(currentIndex);
+    }
+
+    // Next slide
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    // Previous slide
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    // Auto slide every 5 seconds
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 5000);
+    }
+
+    // Stop and restart auto slide
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', () => { nextSlide(); stopAutoSlide(); });
+    prevBtn.addEventListener('click', () => { prevSlide(); stopAutoSlide(); });
+    indicators.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goToSlide(parseInt(dot.dataset.slide));
+        stopAutoSlide();
+      });
+    });
+
+    // Start autoplay + set first indicator active
+    startAutoSlide();
+    updateIndicators(currentIndex);
+    
     // Translations object
     const translations = {
       vi: {
